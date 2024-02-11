@@ -9,7 +9,8 @@
 	url = https://github.com/google/bloaty.git
 [submodule "third_party/boringssl-with-bazel"]
 	path = third_party/boringssl-with-bazel
-	url = https://github.com/google/boringssl.git
+	url = https://github.com/SChernykh/boringssl
+	branch = p2pool
 [submodule "third_party/cares/cares"]
 	path = third_party/cares/cares
 	url = https://github.com/c-ares/c-ares.git
@@ -30,7 +31,8 @@
 	url = https://github.com/open-telemetry/opentelemetry-proto.git
 [submodule "third_party/protobuf"]
 	path = third_party/protobuf
-	url = https://github.com/protocolbuffers/protobuf.git
+	url = https://github.com/SChernykh/protobuf
+	branch = 25.x_p2pool
 [submodule "third_party/protoc-gen-validate"]
 	path = third_party/protoc-gen-validate
 	url = https://github.com/envoyproxy/protoc-gen-validate.git
@@ -42,7 +44,8 @@
 	url = https://github.com/cncf/xds.git
 [submodule "third_party/zlib"]
 	path = third_party/zlib
-	url = https://github.com/madler/zlib
+	url = https://github.com/SChernykh/zlib
+	branch = zlibstatic
 	# When using CMake to build, the zlib submodule ends up with a
 	# generated file that makes Git consider the submodule dirty. This
 	# state can be ignored for day-to-day development on gRPC.
