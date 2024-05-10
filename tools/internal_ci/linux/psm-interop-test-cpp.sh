@@ -1,4 +1,5 @@
-# Copyright 2016 gRPC authors.
+#!/usr/bin/env bash
+# Copyright 2024 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,7 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+set -eo pipefail
 
-# AUTO-GENERATED FROM `$REPO_ROOT/templates/src/python/grpcio_health_checking/grpc_version.py.template`!!!
+# Input parameters to psm:: methods of the install script.
+readonly GRPC_LANGUAGE="cpp"
+readonly BUILD_SCRIPT_DIR="$(dirname "$0")"
 
-VERSION = '1.61.2'
+source "${BUILD_SCRIPT_DIR}/psm-interop-install-lib.sh"
+psm::lang::source_install_lib
+source "${BUILD_SCRIPT_DIR}/psm-interop-build-${GRPC_LANGUAGE}.sh"
+psm::run "${PSM_TEST_SUITE}"
