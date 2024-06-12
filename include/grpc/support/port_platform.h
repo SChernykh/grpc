@@ -612,7 +612,7 @@ typedef unsigned __int64 uint64_t;
 #define GPR_MAX_ALIGNMENT 16
 
 #ifndef GRPC_ARES
-#define GRPC_ARES 1
+#define GRPC_ARES 0
 #endif
 
 #ifndef GRPC_IF_NAMETOINDEX
