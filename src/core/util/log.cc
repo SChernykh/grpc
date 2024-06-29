@@ -73,7 +73,7 @@ int gpr_should_log(gpr_log_severity severity) {
       // Same holds for VLOG_IS_ON(2).
       return absl::MinLogLevel() <= absl::LogSeverityAtLeast::kInfo;
     case GPR_LOG_SEVERITY_DEBUG:
-      return VLOG_IS_ON(2);
+      return ABSL_VLOG_IS_ON(2);
     default:
       DLOG(ERROR) << "Invalid gpr_log_severity.";
       return true;
