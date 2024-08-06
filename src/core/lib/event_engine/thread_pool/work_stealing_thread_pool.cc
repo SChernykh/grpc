@@ -36,6 +36,7 @@
 #include <grpc/support/thd_id.h>
 
 #include "src/core/lib/backoff/backoff.h"
+#include "src/core/lib/debug/trace_impl.h"
 #include "src/core/lib/event_engine/common_closures.h"
 #include "src/core/lib/event_engine/thread_local.h"
 #include "src/core/lib/event_engine/trace.h"
@@ -266,7 +267,6 @@ void WorkStealingThreadPool::WorkStealingThreadPoolImpl::StartThread() {
 }
 
 void WorkStealingThreadPool::WorkStealingThreadPoolImpl::Quiesce() {
-  LOG(INFO) << "WorkStealingThreadPoolImpl::Quiesce";
   SetShutdown(true);
   // Wait until all threads have exited.
   // Note that if this is a threadpool thread then we won't exit this thread
@@ -318,7 +318,8 @@ bool WorkStealingThreadPool::WorkStealingThreadPoolImpl::IsQuiesced() {
 }
 
 void WorkStealingThreadPool::WorkStealingThreadPoolImpl::PrepareFork() {
-  LOG(INFO) << "WorkStealingThreadPoolImpl::PrepareFork";
+  LOG_IF(INFO, GRPC_TRACE_FLAG_ENABLED(event_engine))
+      << "WorkStealingThreadPoolImpl::PrepareFork";
   SetForking(true);
   work_signal_.SignalAll();
   auto threads_were_shut_down = living_thread_count_.BlockUntilThreadCount(

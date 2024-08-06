@@ -210,7 +210,8 @@ class TcpZerocopySendCtx {
     if (send_records_ == nullptr || free_send_records_ == nullptr) {
       gpr_free(send_records_);
       gpr_free(free_send_records_);
-      LOG(INFO) << "Disabling TCP TX zerocopy due to memory pressure.\n";
+      GRPC_TRACE_LOG(tcp, INFO)
+          << "Disabling TCP TX zerocopy due to memory pressure.\n";
       memory_limited_ = true;
     } else {
       for (int idx = 0; idx < max_sends_; ++idx) {
@@ -806,7 +807,6 @@ static void tcp_ref(grpc_tcp* tcp) { tcp->refcount.Ref(); }
 #endif
 
 static void tcp_destroy(grpc_endpoint* ep) {
-  gpr_log(GPR_INFO, "IOMGR endpoint shutdown");
   grpc_tcp* tcp = reinterpret_cast<grpc_tcp*>(ep);
   ZerocopyDisableAndWaitForRemaining(tcp);
   grpc_fd_shutdown(tcp->em_fd, absl::UnavailableError("endpoint shutdown"));
