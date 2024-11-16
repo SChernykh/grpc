@@ -7,6 +7,10 @@
 
 #include "upb/message/internal/message.h"
 
+#ifdef _MSC_VER
+#define _UCRT_NOISY_NAN
+#endif
+
 #include <math.h>
 #include <string.h>
 
